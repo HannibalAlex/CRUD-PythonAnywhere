@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Base de datos</title>
+</head>
+<body>
+    <h1>Estado de la conexión:</h1>
+    <p>{{ message }}</p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+                <form action="{{ url_for('delete', id=row[0]) }}" method="POST" style="display:inline;">
+                    <button type="submit">Eliminar</button>
+                </form>
+                <form action="{{ url_for('update', id=row[0]) }}" method="GET" style="display:inline;">
+                    <button type="submit">Actualizar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Agregar ítems</h2>
+    <form action="{{ url_for('index') }}" method="POST">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="precio">Precio</label>
+        <input type="text" id="precio" name="precio" required>
+        <button type="submit">Agregar</button>
+    </form>
+</body>
+</html>
+
