@@ -13,7 +13,7 @@ try:
     mensaje = "¡Estás conectado!"
     mycursor = conn.cursor()
 except mysql.connector.Error as e:
-    results = ["#"]
+    resultado = ["#"]
     mensaje = f"NO ESTÁS CONECTADO: {e}"
 
 def add_item(nombre, precio):
@@ -43,8 +43,8 @@ def index():
         return redirect(url_for('index'))
 
     mycursor.execute("SELECT * FROM articulos")
-    results = mycursor.fetchall()
-    return render_template('index.html', mensaje=mensaje, results=results)
+    resultado = mycursor.fetchall()
+    return render_template('index.html', mensaje=mensaje, resultado=resultado)
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
