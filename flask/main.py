@@ -10,11 +10,11 @@ try:
         password="Tupassword",
         db="Tunombre$basedatos"
     )
-    message = "¡Estás conectado!"
+    mensaje = "¡Estás conectado!"
     mycursor = conn.cursor()
 except mysql.connector.Error as e:
     results = ["#"]
-    message = f"NO ESTÁS CONECTADO: {e}"
+    mensaje = f"NO ESTÁS CONECTADO: {e}"
 
 def add_item(nombre, precio):
     query = "INSERT INTO articulos (nombre, precio) VALUES (%s, %s);"
@@ -44,7 +44,7 @@ def index():
 
     mycursor.execute("SELECT * FROM articulos")
     results = mycursor.fetchall()
-    return render_template('index.html', message=message, results=results)
+    return render_template('index.html', mensaje=mensaje, results=results)
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
